@@ -14,9 +14,8 @@ class ChannelsController extends Controller
      */
     public function index()
     {
-        $channels = Channel::all();
-        
-        return view('channels.index',compact('channels'));
+        $channel_pages = Channel::orderBy('created_at', 'desc')->paginate(3);
+        return view('channels.index', compact('channel_pages'));
     }
 
     /**

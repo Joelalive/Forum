@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+
             <div class="card">
                 <div class="card-header">Channels </div>
 
@@ -15,24 +13,26 @@
                    <th>Delete</th>
                    </thead>
                    <tbody>
+                   
+                   @foreach($channel_pages as $page)
                    <tr>
-                   @foreach($channels as $channel)
-                   <td>{{$channel->title}}</td>
-                   <td><a class="btn btn-info btn-sm" href="{{route('channels.edit',['channel' => $channel->id])}}"> Edit </a></td>
+                   <td>{{$page->title}}</td>
+                   <td><a class="btn btn-info btn-sm" href="{{route('channels.edit',['channel' => $page->id])}}"> Edit </a></td>
                    <td>
-                   <form action="{{route('channels.destroy',['channel' => $channel->id])}}" method="POST">
+                   <form action="{{route('channels.destroy',['channel' => $page->id])}}" method="POST">
                    @csrf
                    @method('DELETE')
                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                    </form>
                    </td>
-                   @endforeach
                    </tr>
+                   @endforeach
                    </tbody>
                    </table>
+                   <div class="text-center">
+                   {{$channel_pages->links()}}
+                   </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+
 @endsection
